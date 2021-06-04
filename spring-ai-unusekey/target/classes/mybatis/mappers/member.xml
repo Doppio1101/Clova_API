@@ -110,7 +110,7 @@
     <![CDATA[
       select * from t_member
      ]]> 
-   </sql>  -->  
+   </sql> mysql때문에 주석 처리한 부분 아님 -->  
   
 <!--    
   <select id="searchMember" parameterType="memberVO" resultMap="memResult">
@@ -134,10 +134,10 @@
        </where>
        order by joinDate desc
    </select> -->
-   
+   <!-- 
    <select id="foreachSelect" resultMap="memResult" parameterType="java.util.Map">
-      <!-- <include refid="a" /> -->
-      <![CDATA[
+       --><!-- <include refid="a" /> -->
+      <!-- <![CDATA[
         select * from t_member 
           
       ]]>
@@ -151,7 +151,7 @@
    
    <insert id="foreachInsert"  parameterType="java.util.Map">
       <foreach item="item"  collection="list"   open="INSERT ALL" separator=" " close="SELECT * FROM DUAL" >
-          INTO  t_member(id, pwd, name, email)
+          INTO  t_member(id, pwd, name, email) --><!-- SELECT * FROM DUAL 얘가 들어가면 mysql에서는 에러가 발생한다. 
           VALUES  (#{item.id},
                     #{item.pwd},
                     #{item.name},
@@ -159,12 +159,13 @@
       </foreach>
    </insert>
    
-   <!--  like 검색 -->
-   <select id="selectLike" resultMap="memResult"  parameterType="String" >
+   --><!--  like 검색 -->
+   <!-- <select id="selectLike" resultMap="memResult"  parameterType="String" >
       <![CDATA[
          select * from t_member
          where
          name like '%' || #{name} || '%'		
       ]]>
     </select>
+     -->
 </mapper>
